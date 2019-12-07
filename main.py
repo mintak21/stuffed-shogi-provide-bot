@@ -47,14 +47,14 @@ class Number(Enum):
             数字
         Returns
         --------------------------
-        CardNumber
+        Number
             数字に対応するNumber　ない場合はエラー
         """
         if isinstance(target, str):
             for e in Number:
                 if e.str_number == target:
                     return e
-        elif isinstance(target, str):
+        elif isinstance(target, int):
             for e in Number:
                 if e.int_number == target:
                     return e
@@ -127,7 +127,9 @@ def _popRandomly(key):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     try:
-        key = Number.value_of(int(event.message.text))
+        int_num = int(event.message.text)
+        app.logger.info('int_num is' + int_num)
+        key = Number.value_of(int_num)
         image_url = _popRandomly(key)
         if image_url is not None:
             # ストックあり
