@@ -19,35 +19,45 @@ from linebot.models import (
 class Number(Enum):
     """詰将棋の手数
     """
-    SEVEN = 'seven'
-    NINE = 'nine'
-    ELEVEN = 'eleven'
-    THIRTEEN = 'thirteen'
-    FIFTEEN = 'fifteen'
-    NINETEEN = 'nineteen'
+    SEVEN = (7, 'seven')
+    NINE = (9, 'nine')
+    ELEVEN = (11, 'eleven')
+    THIRTEEN = (13, 'thirteen')
+    FIFTEEN = (15, 'fifteen')
+    NINETEEN = (19, 'nineteen')
 
-    def __init__(self, str_number):
-        self.__number = str_number
+    def __init__(self, int_number, str_number):
+        self.__int_number = int_number
+        self.__str_number = str_number
 
     @property
-    def number(self):
-        return self.__number
+    def int_number(self):
+        return self.__int_number
+
+    @property
+    def str_number(self):
+        return self.__str_number
 
     @classmethod
-    def value_of(cls, str_number):
+    def value_of(cls, target):
         """引数に対応するNUMBER返却する。
         Parameters
         --------------------------
-        number : str
-            数字(文字)
+        number : str or int
+            数字
         Returns
         --------------------------
         CardNumber
             数字に対応するNumber　ない場合はエラー
         """
-        for e in Number:
-            if e.number == str_number:
-                return e
+        if isinstance(target, str):
+            for e in Number:
+                if e.str_number == target:
+                    return e
+        elif isinstance(target, str):
+            for e in Number:
+                if e.int_number == target:
+                    return e
         raise ValueError()
 
 
@@ -117,7 +127,7 @@ def _popRandomly(key):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     try:
-        key = Number.value_of(event.message.text)
+        key = Number.value_of(int(event.message.text))
         image_url = _popRandomly(key)
         if image_url is not None:
             # ストックあり
