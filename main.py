@@ -127,9 +127,7 @@ def _popRandomly(key):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     try:
-        int_num = int(event.message.text)
-        app.logger.info('int_num is' + int_num)
-        key = Number.value_of(int_num)
+        key = Number.value_of(int(event.message.text))
         image_url = _popRandomly(key)
         if image_url is not None:
             # ストックあり
@@ -138,7 +136,7 @@ def handle_text_message(event):
                 messages=ImageSendMessage(
                     original_content_url=_popRandomly(key)))
         else:
-            # ストックなし or 当該手数準備なし
+            # ストックなし
             line_bot_api.reply_message(event.reply_token, TextSendMessage(
                 text='{key}手の詰将棋ストックがありません。ほかの手数を入力してください。'.format(key=key)))
     except ValueError:
