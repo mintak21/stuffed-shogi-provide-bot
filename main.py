@@ -67,6 +67,8 @@ def read_config(file='config/config.ini', section='DEFAULT'):
 
 
 # グローバル変数群
+MIN = 7
+MAX = 19
 app = Flask(__name__)
 handler = WebhookHandler(os.getenv('SSP_CHANNEL_SECRET'))
 line_bot_api = LineBotApi(os.getenv('SSP_CHANNEL_ACCESS_TOKEN'))
@@ -115,7 +117,7 @@ def _popRandomly(key):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     try:
-        key = Number.value_of(int(event.message.text))
+        key = Number.value_of(event.message.text)
         image_url = _popRandomly(key)
         if image_url is not None:
             # ストックあり
@@ -129,8 +131,10 @@ def handle_text_message(event):
                 text='{key}手の詰将棋ストックがありません。ほかの手数を入力してください。'.format(key=key)))
     except ValueError:
         # 数値以外
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(
-            text='{min}から{max}までの整数を入力すると、詰将棋の図が出てくるよ。'))
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(
+                text='{min}から{max}までの整数を入力すると、詰将棋の図が出てくるよ。'.format(
+                    min=MIN, max=MAX)))
 
 
 if __name__ == "__main__":
