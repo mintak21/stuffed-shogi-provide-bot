@@ -19,11 +19,9 @@ from linebot.models import (
 @classmethod
 def read_config(file='config/config.ini', section='DEFAULT'):
     """config.iniを読んで、Number:listの辞書にする
-
     Args:
         file (str, optional): 指定ファイル. Defaults to 'config/config.ini'.
         section (str, optional): 指定セクション. Defaults to 'DEFAULT'.
-
     Returns:
         dict: 手数とURLリストの辞書
     """
@@ -62,10 +60,8 @@ def callback():
 
 def _popRandomly(key):
     """key手の詰将棋URLをランダムに1つ取得する。
-
     Args:
         key (Number): 手数の部分
-
     Returns:
         str: ランダムに取り出された画像URL
              ただし、用意されていない手数や当該手数のストックがなくなった場合はNone。
@@ -100,36 +96,34 @@ def handle_text_message(event):
 class Number(Enum):
     """詰将棋の手数
     """
-    SEVEN = 7
-    NINE = 9
-    ELEVEN = 11
-    THIRTEEN = 13
-    FIFTEEN = 15
-    NINETEEN = 19
+    SEVEN = 'seven'
+    NINE = 'nine'
+    ELEVEN = 'eleven'
+    THIRTEEN = 'thirteen'
+    FIFTEEN = 'fifteen'
+    NINETEEN = 'nineteen'
 
-    def __init__(self, int_number):
-        self.__number = int_number
+    def __init__(self, str_number):
+        self.__number = str_number
 
     @property
     def number(self):
         return self.__number
 
     @classmethod
-    def value_of(cls, int_number):
+    def value_of(cls, str_number):
         """引数に対応するNUMBER返却する。
-
         Parameters
         --------------------------
-        number : int
-            数字
-
+        number : str
+            数字(文字)
         Returns
         --------------------------
         CardNumber
             数字に対応するNumber　ない場合はエラー
         """
         for e in Number:
-            if e.number == int_number:
+            if e.number == str_number:
                 return e
         raise ValueError()
 
