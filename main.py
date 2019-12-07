@@ -16,7 +16,41 @@ from linebot.models import (
 )
 
 
-@classmethod
+class Number(Enum):
+    """詰将棋の手数
+    """
+    SEVEN = 'seven'
+    NINE = 'nine'
+    ELEVEN = 'eleven'
+    THIRTEEN = 'thirteen'
+    FIFTEEN = 'fifteen'
+    NINETEEN = 'nineteen'
+
+    def __init__(self, str_number):
+        self.__number = str_number
+
+    @property
+    def number(self):
+        return self.__number
+
+    @classmethod
+    def value_of(cls, str_number):
+        """引数に対応するNUMBER返却する。
+        Parameters
+        --------------------------
+        number : str
+            数字(文字)
+        Returns
+        --------------------------
+        CardNumber
+            数字に対応するNumber　ない場合はエラー
+        """
+        for e in Number:
+            if e.number == str_number:
+                return e
+        raise ValueError()
+
+
 def read_config(file='config/config.ini', section='DEFAULT'):
     """config.iniを読んで、Number:listの辞書にする
     Args:
@@ -26,7 +60,8 @@ def read_config(file='config/config.ini', section='DEFAULT'):
         dict: 手数とURLリストの辞書
     """
     parser = configparser.ConfigParser()
-    items = parser.read(file, encoding='utf-8')[section]
+    parser.read(file, encoding='utf-8')
+    items = parser[section]
     return {Number.value_of(item[0]): item[1].split(',')
             for item in items.items()}
 
@@ -36,6 +71,11 @@ app = Flask(__name__)
 handler = WebhookHandler(os.getenv('SSP_CHANNEL_SECRET'))
 line_bot_api = LineBotApi(os.getenv('SSP_CHANNEL_ACCESS_TOKEN'))
 stuffed_shogi_urls = read_config()
+
+
+@app.route('/', methods=['GET'])
+def health():
+    return 'Health Check OK'
 
 
 @app.route("/callback", methods=['POST'])
@@ -91,41 +131,6 @@ def handle_text_message(event):
         # 数値以外
         line_bot_api.reply_message(event.reply_token, TextSendMessage(
             text='{min}から{max}までの整数を入力すると、詰将棋の図が出てくるよ。'))
-
-
-class Number(Enum):
-    """詰将棋の手数
-    """
-    SEVEN = 'seven'
-    NINE = 'nine'
-    ELEVEN = 'eleven'
-    THIRTEEN = 'thirteen'
-    FIFTEEN = 'fifteen'
-    NINETEEN = 'nineteen'
-
-    def __init__(self, str_number):
-        self.__number = str_number
-
-    @property
-    def number(self):
-        return self.__number
-
-    @classmethod
-    def value_of(cls, str_number):
-        """引数に対応するNUMBER返却する。
-        Parameters
-        --------------------------
-        number : str
-            数字(文字)
-        Returns
-        --------------------------
-        CardNumber
-            数字に対応するNumber　ない場合はエラー
-        """
-        for e in Number:
-            if e.number == str_number:
-                return e
-        raise ValueError()
 
 
 if __name__ == "__main__":
