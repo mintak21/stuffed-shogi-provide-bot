@@ -64,7 +64,7 @@ def _popRandomly(key):
     """key手の詰将棋URLをランダムに1つ取得する。
 
     Args:
-        key (str): 手数の部分
+        key (Number): 手数の部分
 
     Returns:
         str: ランダムに取り出された画像URL
@@ -79,7 +79,7 @@ def _popRandomly(key):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     try:
-        key = int(event.message.text)
+        key = Number.value_of(int(event.message.text))
         image_url = _popRandomly(key)
         if image_url is not None:
             # ストックあり
