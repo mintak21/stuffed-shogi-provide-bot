@@ -4,8 +4,8 @@ import os
 host = '0.0.0.0'  # Flaskは外部公開を許していないので、基本これ
 port = os.getenv('PORT', 5000)
 
-# bind = str(host) + ':' + str(port)
-bind = 'unix:/tmp/nginx.socket'
+bind = str(host) + ':' + str(port)
+# bind = 'unix:/tmp/nginx.socket'
 
 # Debugging
 reload = True
