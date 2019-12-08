@@ -12,6 +12,7 @@ reload = True
 
 # Logging
 accesslog = '-'
+loglevel = 'debug'
 
 # Proc Name
 proc_name = 'Tsume-Shogi Provider'

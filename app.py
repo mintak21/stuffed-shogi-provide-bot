@@ -1,4 +1,5 @@
 import configparser
+import logging
 import os
 from random import randint
 
@@ -36,6 +37,7 @@ def read_config(file='config/config.ini', section='DEFAULT'):
 MIN = 7
 MAX = 19
 app = Flask(__name__)
+app.logger.setLevel(logging.DEBUG)
 handler = WebhookHandler(os.getenv('SSP_CHANNEL_SECRET'))
 line_bot_api = LineBotApi(os.getenv('SSP_CHANNEL_ACCESS_TOKEN'))
 stuffed_shogi_url_cache = read_config()
@@ -66,6 +68,7 @@ def callback():
 def handle_text_message(event):
     """メッセージハンドリング部分
     """
+    app.logger.info(stuffed_shogi_url_cache)
     req_text = event.message.text
     res_messages = list()
     if req_text == 'リセット':
@@ -89,6 +92,7 @@ def handle_text_message(event):
 def _reset_urls_cache():
     global stuffed_shogi_url_cache
     stuffed_shogi_url_cache = read_config()
+    app.logger.info(stuffed_shogi_url_cache)
 
 
 def _stuffed_shogi_image_message(req_text):
@@ -128,14 +132,13 @@ def _popRandomly(key):
              ただし、用意されていない手数や当該手数のストックがなくなった場合はNone。
     """
     target_urls = stuffed_shogi_url_cache.get(key)
+    app.logger.info('targets:' + str(target_urls))
     if target_urls is None or len(target_urls) <= 0:
         return None
     i = randint(0, len(target_urls) - 1)
-    app.logger.warn('randint:' +
-                    str(i) +
-                    ', cache_length:' +
-                    str(len(target_urls)))
-    return target_urls.pop(i)
+    result = target_urls.pop(i)
+    app.logger.info(stuffed_shogi_url_cache)
+    return result
 
 
 if __name__ == "__main__":
