@@ -28,7 +28,6 @@ http {
         proxy_set_header X-Forwarded-Host   $http_host;
         proxy_set_header X-Forwarded-Server $http_host;
         proxy_http_version 1.1;
-
         proxy_pass http://heroku_app;
     }
   }
