@@ -67,7 +67,7 @@ def handle_text_message(event):
     """メッセージハンドリング部分
     """
     req_text = event.message.text
-    res_messages = tuple()
+    res_messages = list()
     if req_text == 'リセット':
         _reset_urls_cache()
         app.logger.warn('stuffed-shogi urls have resetted.')
