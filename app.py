@@ -130,7 +130,12 @@ def _popRandomly(key):
     target_urls = stuffed_shogi_url_cache.get(key)
     if target_urls is None or len(target_urls) <= 0:
         return None
-    return target_urls.pop(randint(0, len(target_urls) - 1))
+    i = randint(0, len(target_urls) - 1)
+    app.logger.warn('randint:' +
+                    str(i) +
+                    ', cache_length:' +
+                    str(len(target_urls)))
+    return target_urls.pop(i)
 
 
 if __name__ == "__main__":
