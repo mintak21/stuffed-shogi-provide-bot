@@ -68,7 +68,6 @@ def callback():
 def handle_text_message(event):
     """メッセージハンドリング部分
     """
-    app.logger.info(stuffed_shogi_url_cache)
     req_text = event.message.text
     res_messages = list()
     if req_text == 'リセット':
@@ -92,7 +91,6 @@ def handle_text_message(event):
 def _reset_urls_cache():
     global stuffed_shogi_url_cache
     stuffed_shogi_url_cache = read_config()
-    app.logger.info(stuffed_shogi_url_cache)
 
 
 def _stuffed_shogi_image_message(req_text):
@@ -132,13 +130,9 @@ def _popRandomly(key):
              ただし、用意されていない手数や当該手数のストックがなくなった場合はNone。
     """
     target_urls = stuffed_shogi_url_cache.get(key)
-    app.logger.info('targets:' + str(target_urls))
     if target_urls is None or len(target_urls) <= 0:
         return None
-    i = randint(0, len(target_urls) - 1)
-    result = target_urls.pop(i)
-    app.logger.info(stuffed_shogi_url_cache)
-    return result
+    return target_urls.pop(randint(0, len(target_urls) - 1))
 
 
 if __name__ == "__main__":
