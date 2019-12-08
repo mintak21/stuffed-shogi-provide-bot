@@ -16,3 +16,7 @@ loglevel = 'debug'
 
 # Proc Name
 proc_name = 'Tsume-Shogi Provider'
+
+# Worker Processes
+workers = 1
+worker_class = 'sync'
