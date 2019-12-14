@@ -1,0 +1,69 @@
+{
+    "7": [
+        {
+            "id": 71,
+            "question_image": "https://i.gyazo.com/e08be3144e77dbdaff3941bee065563c.png",
+            "answer": "▲1四龍△1三金▲同龍△同玉▲2二角△同玉▲2三金"
+        },
+        {
+            "id": 72,
+            "question_image": "https://i.gyazo.com/840c886db9cbe66c1558ca12bb227826.png",
+            "answer": "▲3四角△同龍▲1三金△同玉▲3一角△2三玉▲2二角成"
+        }
+    ],
+    "9": [
+        {
+            "id": 91,
+            "question_image": "https://i.gyazo.com/b23a87fb6ad4a65fa43a48d94a787ed6.png",
+            "answer": "▲2一桂成△同玉▲1三桂△1一玉▲1二角成△同飛▲3三角△2二歩▲2三桂"
+        },
+        {
+            "id": 92,
+            "question_image": "https://i.gyazo.com/9c4820c2da8a466b43dfa5b360e12b6f.png",
+            "answer": "▲1四歩△2二玉▲1三歩成△同玉▲1四香△2二玉▲3二金△2三玉▲1五桂"
+        }
+    ],
+    "11": [
+        {
+            "id": 111,
+            "question_image": "https://i.gyazo.com/39e34cb3c79abf1a542f71c5ad4f6e34.png",
+            "answer": "▲3三龍△同玉▲2三角成△4四玉▲4五馬△3三玉▲3四馬△3二玉▲2三馬△同玉▲2二角成"
+        },
+        {
+            "id": 112,
+            "question_image": "https://i.gyazo.com/b8350670076570e1e43fae91b778d6c9.png",
+            "answer": "▲6一飛成△2二玉▲3一角△1二玉▲2四桂△同歩▲3四角成△同歩▲5二龍△2三玉▲2二龍"
+        }
+    ],
+    "13": [
+        {
+            "id": 131,
+            "question_image": "https://i.gyazo.com/a21c31f7571e3e429152b6f06a25b9fe.png",
+            "answer": "▲3三銀打△同桂▲3一角△2一玉▲2二歩△1二玉▲2四桂△同歩▲1三桂成△同玉▲2一歩成△2三玉▲2二角成"
+        },
+        {
+            "id": 132,
+            "question_image": "https://i.gyazo.com/dfe69ce707fc77dfb4ecaeb438b14266.png",
+            "answer": "▲3二飛△1三玉▲1二金△同香▲2二飛成△同玉▲3二と△同玉▲4四桂△2二玉▲3一馬△同玉▲3二金"
+        }
+    ],
+    "15": [
+        {
+            "id": 151,
+            "question_image": "https://i.gyazo.com/eea167c9934c343e294f14cf1eda100e.png",
+            "answer": "▲4四馬△3三角▲同馬△同銀▲1二成銀△同玉▲2一角△1一玉▲2三桂不成△2二玉▲3二角成△1二玉▲1一桂成△同玉▲2一馬"
+        },
+        {
+            "id": 152,
+            "question_image": "https://i.gyazo.com/f81b912e807f2c8ee8cb38942c973bae.png",
+            "answer": "▲1二銀△3二玉▲2三銀成△2一玉▲1二成銀△3二玉▲2二成銀△同玉▲2三龍△3一玉▲3三龍△3二龍▲2二銀△4一玉▲6三角成"
+        }
+    ],
+    "17": [
+        {
+            "id": 191,
+            "question_image": "https://i.gyazo.com/68ecbb9fef5150e294f8828c84cb5b5b.png",
+            "answer": "▲4一銀△2一玉▲3二銀打△2二玉▲1一飛成△同玉▲3三角成△2二金▲同馬△同玉▲2三金△1一玉▲2一銀成△同玉▲3二銀成△1一玉▲2二成銀"
+        }
+    ]
+}
